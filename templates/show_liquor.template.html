@@ -1,0 +1,44 @@
+{% extends "layout.template.html" %}
+
+{%block content %}
+<h3>List of Liquor</h3>
+
+<div class="form-group form-inline" method="GET">
+
+    <input type="text" placeholder="Enter search" name="search-liquor" class="form-control"/>
+
+    <label>Type:</label>
+    <select class="form-control col-4" name="liquor-type">
+        {%for type in liquor_type %}
+        <option value="{{type._id}}">{{type.type}}</option>
+        {%endfor%}
+    </select>
+
+    <input type="submit" value ="Search" class="form-control col-2"/>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Liquor name</th>
+            <th>Liquor type</th>
+            <th>Liquor image</th>
+            <th>ID</th>
+            <th></th>
+        </tr>
+        {%for i in all_liquor %}
+            <tr>
+                <td>{{i.name}}</td>
+                <td>{{i.type}}</td>
+                <td>{{i.primary_alcohol}}</td>
+                <td>{{i._id}}</td>
+                <td>
+                    <a href="{{url_for('update_liquor', id=i._id)}}" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="{{url_for('delete_liquor', id=i._id)}}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+                {{i.liquor_list}}
+            </tr>
+        {%endfor%}
+    </thead>
+
+{%endblock%}
