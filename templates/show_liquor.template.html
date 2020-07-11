@@ -3,7 +3,7 @@
 {%block content %}
 <h3>List of Liquor</h3>
 
-<div class="form-group form-inline" method="GET">
+<form class="form-group form-inline" method="GET">
 
     <input type="text" placeholder="Enter search" name="search-liquor" class="form-control"/>
 
@@ -15,7 +15,7 @@
     </select>
 
     <input type="submit" value ="Search" class="form-control col-2"/>
-</div>
+</form>
 
 <table class="table">
     <thead>
@@ -23,20 +23,17 @@
             <th>Liquor name</th>
             <th>Liquor type</th>
             <th>Liquor image</th>
-            <th>ID</th>
             <th></th>
         </tr>
         {%for i in all_liquor %}
             <tr>
                 <td>{{i.name}}</td>
                 <td>{{i.type}}</td>
-                <td>{{i.primary_alcohol}}</td>
-                <td>{{i._id}}</td>
+                <td><img src="{{i.uploaded_file_url}}" class="uploaded-image"/></td>
                 <td>
                     <a href="{{url_for('update_liquor', id=i._id)}}" class="btn btn-primary btn-sm">Edit</a>
                     <a href="{{url_for('delete_liquor', id=i._id)}}" class="btn btn-danger btn-sm">Delete</a>
                 </td>
-                {{i.liquor_list}}
             </tr>
         {%endfor%}
     </thead>

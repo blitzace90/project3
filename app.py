@@ -11,6 +11,8 @@ app = Flask(__name__)
 
 MONGO_URI = os.environ.get('MONGO_URI')
 client = pymongo.MongoClient(MONGO_URI)
+CLOUD_NAME = os.environ.get('CLOUD_NAME')
+UPLOAD_PRESET = os.environ.get('UPLOAD_PRESET')
 
 DB_NAME = "project3_liquor"
 
@@ -31,27 +33,30 @@ def home():
 @app.route('/liquor/list')
 def show_liquor():
     # all_liquor = client[DB_NAME].liquor.find()
-    # liquor_type = client[DB_NAME].liquor.find()
+    liquor_type = client[DB_NAME].liquor.find()
     search_liquor = request.args.get('search-liquor')
+    # print(search_liquor)
 
     criteria = {}
     if search_liquor != "" and search_liquor is not None:
-        criteria['liquor_list'] = {
+        criteria['name'] = {
             "$regex": search_liquor,
             "$options": "i"
         }
 
     all_liquor = client[DB_NAME].liquor.find(criteria)
 
-    # return render_template('show_liquor.template.html', all_liquor=all_liquor, liquor_type=liquor_type)
-    return render_template('show_liquor.template.html', all_liquor=all_liquor)
+    return render_template('show_liquor.template.html', all_liquor=all_liquor, liquor_type=liquor_type)
 
 # Add route
 
 
 @app.route('/liquor/create')
 def create_liquor():
-    return render_template('create_liquor.template.html')
+    return render_template('create_liquor.template.html',
+                           cloud_name=CLOUD_NAME,
+                           upload_preset=UPLOAD_PRESET
+                           )
 
 
 @app.route('/liquor/create', methods=["POST"])
@@ -63,6 +68,7 @@ def process_create_liquor():
     standard_drinkware = request.form.get('standard_drinkware')
     ingredients = request.form.get('ingredients')
     preparation = request.form.get('preparation')
+    uploaded_file_url = request.form.get('uploaded_file_url')
 
     client[DB_NAME].liquor.insert_one({
         "name": liquor_name,
@@ -71,7 +77,8 @@ def process_create_liquor():
         "serving_method": serving_method,
         "standard_drinkware": standard_drinkware,
         "ingredients": ingredients,
-        "preparation": preparation
+        "preparation": preparation,
+        "uploaded_file_url": uploaded_file_url
     })
 
     return redirect(url_for('show_liquor'))
@@ -85,7 +92,11 @@ def update_liquor(id):
         "_id": ObjectId(id)
     })
 
-    return render_template("update_liquor.template.html", liquor=liquor)
+    return render_template("update_liquor.template.html", 
+                           liquor=liquor,
+                           cloud_name=CLOUD_NAME,
+                           upload_preset=UPLOAD_PRESET
+                           )
 
 # Process update route
 
@@ -99,6 +110,7 @@ def process_update_liquor(id):
     standard_drinkware = request.form.get('standard_drinkware')
     ingredients = request.form.get('ingredients')
     preparation = request.form.get('preparation')
+    uploaded_file_url = request.form.get('uploaded_file_url')
 
     client[DB_NAME].liquor.update_one({
         "_id": ObjectId(id)
@@ -110,7 +122,8 @@ def process_update_liquor(id):
             "serving_method": serving_method,
             "standard_drinkware": standard_drinkware,
             "ingredients": ingredients,
-            "preparation": preparation
+            "preparation": preparation,
+            "uploaded_file_url": uploaded_file_url
         }
     })
 
