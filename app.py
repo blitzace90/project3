@@ -23,7 +23,7 @@ app.secret_key = SESSION_KEY
 # Home Route
 
 
-@app.route('/home')
+@app.route('/')
 def home():
     return render_template('home.template.html')
 
