@@ -1,9 +1,23 @@
-{%extends 'layout.template.html' %}
+{%extends 'layout.template.html' %} 
 
-{%block title%}Home{%endblock%}
+{%block title%}Home{%endblock%} 
 
 {%block content%}
-    <div>
-        Home page
+<!--Jumbotron-->
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <div class="jbdescription">
+        <h1 class="display-4">
+            Welcome to the world of liquors
+        </h1>
+        <br><br>
+        <span>
+            Check out our collections of creations contributed by all. You may add your creation here for all to enjoy.
+        </span>
+        <br><br>
+        <a class="btn btn-primary" href="{{url_for('create_liquor')}}">Add</a>
     </div>
+  </div>
+</div>
+
 {%endblock%}

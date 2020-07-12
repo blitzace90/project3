@@ -1,3 +1,72 @@
+/* navbar */
+.navbar {
+    background-color:black;
+}
+
+.navbar .navbar-nav .nav-link {
+    color: white;
+    justify-content: space-between;
+    padding-right: 30px;
+}
+
+.navbar-brand img {
+    width:50%;
+}
+
+/* Home page */
+.jumbotron {
+    background-image: url('/static/images/alcoholpic1.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width:100%;
+    height:600px;
+    text-align:center;
+    margin:0 auto;
+}
+
+.jbdescription {
+    background-color:rgba(255,255,255,0.90);
+    padding: 50px
+} 
+
+/* Create page */
+.background2 {
+    background-image: url('/static/images/alcoholpic2.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width:100%;
+    height:100%;
+    text-align:center;
+    margin:0 auto;
+}
+
+.addliquor {
+    background-color:rgba(255,255,255,0.90);
+    padding: 50px 
+}
+
+.upload-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-upload {
+    width: 100%;
+}
+
+#ingredients {
+    height: 150px;
+    vertical-align: text-top;   
+}
+
+.preparation {
+    height: 150px;
+    vertical-align: text-top;        
+}
+
 .uploaded-image {
-    width: 100px
+    width: 100px;
 }
