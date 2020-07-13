@@ -21,11 +21,15 @@ SESSION_KEY = os.environ.get('SESSION_KEY')
 app.secret_key = SESSION_KEY
 
 # Home Route
+
+
 @app.route('/')
 def home():
     return render_template('home.template.html')
 
 # Read route
+
+
 @app.route('/liquor/list')
 def show_liquor():
     # all_liquor = client[DB_NAME].liquor.find()
@@ -44,7 +48,23 @@ def show_liquor():
 
     return render_template('show_liquor.template.html', all_liquor=all_liquor, liquor_type=liquor_type)
 
+# List individual liquor
+
+
+@app.route("/liquor/list/<id>")
+def liquor_details(id):
+    liquor = client[DB_NAME].liquor.find_one({
+        "_id": ObjectId(id)
+    })
+    return render_template("liquor_details.template.html",
+                           liquor=liquor,
+                           cloud_name=CLOUD_NAME,
+                           upload_preset=UPLOAD_PRESET
+                           )
+
 # Add route
+
+
 @app.route('/liquor/create')
 def create_liquor():
     return render_template('create_liquor.template.html',
@@ -78,19 +98,23 @@ def process_create_liquor():
     return redirect(url_for('show_liquor'))
 
 # Update route
+
+
 @app.route('/liquor/update/<id>')
 def update_liquor(id):
     liquor = client[DB_NAME].liquor.find_one({
         "_id": ObjectId(id)
     })
 
-    return render_template("update_liquor.template.html", 
+    return render_template("update_liquor.template.html",
                            liquor=liquor,
                            cloud_name=CLOUD_NAME,
                            upload_preset=UPLOAD_PRESET
                            )
 
 # Process update route
+
+
 @app.route('/liquor/update/<id>', methods=["POST"])
 def process_update_liquor(id):
     liquor_name = request.form.get('liquor_name')
@@ -120,6 +144,8 @@ def process_update_liquor(id):
     return redirect(url_for('show_liquor'))
 
 # Delete route
+
+
 @app.route('/liquor/delete/<id>')
 def delete_liquor(id):
     liquor = client[DB_NAME].liquor.find_one({
@@ -129,6 +155,8 @@ def delete_liquor(id):
     return render_template('confirm_delete_liquor.template.html', liquor=liquor)
 
 # Process delete route
+
+
 @app.route('/liquor/delete/<id>', methods=['POST'])
 def process_delete_liquor(id):
     client[DB_NAME].liquor.remove({

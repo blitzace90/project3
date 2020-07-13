@@ -1,0 +1,82 @@
+{%extends 'layout.template.html' %}
+
+{%block content%}
+<br>
+<h2>Show each liquor</h2>
+
+
+    <div class="container">
+        <label>Liquor name:</label>
+        <input type="text" class="form-control" name="liquor_name" value="{{liquor.name}}"/>
+    </div>
+
+    <div class="container">
+        <label>Liquor type:</label>
+        <input type="text" class="form-control" name="liquor_type" value="{{liquor.type}}"/>
+    </div>
+
+    <div class="form-group">
+        <label>Liquor name:</label>
+        <input type="text" class="form-control" name="primary_alcohol" value="{{liquor.primary_alcohol}}"/>
+    </div>
+
+    <div class="form-group">
+        <label>Serving method:</label>
+        <input type="text" class="form-control" name="serving_method" value="{{liquor.serving_method}}"/>
+    </div>
+
+    <div class="form-group">
+        <label>Standard drinkware:</label>
+        <input type="text" class="form-control" name="standard_drinkware" value="{{liquor.standard_drinkware}}"/>
+    </div>
+
+    <div>
+        <label>Ingredients:</label>
+        <textarea rows="6" name="ingredients" class="form-control" id="ingredients">{{liquor.ingredients}}</textarea>
+    </div>
+
+    <div>
+        <label>Preparation:</label>
+        <textarea rows="6" name="preparation" class="form-control" id="preparation">{{liquor.preparation}}</textarea>
+    </div>
+
+    <br>
+
+    <div>
+        <a id="upload_widget" class="cloudinary-button">Upload files</a>
+        <input type="hidden" id="uploaded_file_url" name="uploaded_file_url"/>
+        <br/>
+        <img src="{{liquor.uploaded_file_url}}" id="uploaded-image" class="image-upload">
+    </div>
+
+    <br>
+
+    <a href="{{url_for('update_liquor', id=_id)}}" class="btn btn-primary btn-sm">Edit</a>
+    <a href="{{url_for('delete_liquor', id=_id)}}" class="btn btn-danger btn-sm">Delete</a>
+
+
+
+{%endblock%}
+
+{%block js %}
+	<script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
+
+	<script type="text/javascript">
+		var myWidget = cloudinary.createUploadWidget({
+            cloudName: '{{cloud_name}}', 
+            uploadPreset: '{{upload_preset}}'}, (error, result) => { 
+                if (!error && result && result.event === "success") { 
+                    console.log('Done! Here is the image info: ', result.info); 
+                    let fileURL = document.querySelector('#uploaded_file_url');
+                    fileURL.value = result.info.url;
+
+                    document.querySelector('#uploaded-image').src = result.info.url
+                }
+            }
+        )
+
+        document.getElementById("upload_widget").addEventListener("click", function(){
+                myWidget.open();
+        }, false);
+	</script>
+{%endblock%}

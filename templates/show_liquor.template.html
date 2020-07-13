@@ -1,41 +1,66 @@
 {% extends "layout.template.html" %}
 
 {%block content %}
-<h3>List of Liquor</h3>
+<br>
+<div class="container">
+    <h3 class="text-center">List of Creations</h3>
 
-<form class="form-group form-inline" method="GET">
+    <div class="container text-center">
+        <form class="container text-center" method="GET">
+        
+            <input type="text" placeholder="Enter search" name="search-liquor" class="textbox text-center"/>
 
-    <input type="text" placeholder="Enter search" name="search-liquor" class="form-control"/>
+            <input type="submit" value ="Search" class="textbox"/>
 
-    <label>Type:</label>
-    <select class="form-control col-4" name="liquor-type">
-        {%for type in liquor_type %}
-        <option value="{{type._id}}">{{type.type}}</option>
-        {%endfor%}
-    </select>
+            <br>
+            <br>
 
-    <input type="submit" value ="Search" class="form-control col-2"/>
-</form>
+            <label>Type:</label>
+            <select class="" name="liquor-type">
+                {%for type in liquor_type %}
+                <option value="{{type._id}}">{{type.type}}</option>
+                {%endfor%}
+            </select>
+            
+        </form>  
+    </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Liquor name</th>
-            <th>Liquor type</th>
-            <th>Liquor image</th>
-            <th></th>
-        </tr>
-        {%for i in all_liquor %}
+
+    <div class="container">
+        <div class="row">
+            {%for i in all_liquor %}
+            <div class="card col-sm-6 col-md-4">
+                <a href="{{url_for('liquor_details', id=i._id)}}">
+                <img src="{{i.uploaded_file_url}}" class="uploaded-image card-img-top" alt="alcohol image"/>
+                <br><br>
+                <h5 class="card-title">{{i.name}}</h5>
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+    <br>
+
+</div>
+    <!-- <table class="table">
+        <thead>
             <tr>
-                <td>{{i.name}}</td>
-                <td>{{i.type}}</td>
-                <td><img src="{{i.uploaded_file_url}}" class="uploaded-image"/></td>
-                <td>
-                    <a href="{{url_for('update_liquor', id=i._id)}}" class="btn btn-primary btn-sm">Edit</a>
-                    <a href="{{url_for('delete_liquor', id=i._id)}}" class="btn btn-danger btn-sm">Delete</a>
-                </td>
+                <th>Liquor name</th>
+                <th>Liquor type</th>
+                <th>Liquor image</th>
+                <th></th>
             </tr>
-        {%endfor%}
-    </thead>
+            {%for i in all_liquor %}
+                <tr>
+                    <td>{{i.name}}</td>
+                    <td>{{i.type}}</td>
+                    <td><img src="{{i.uploaded_file_url}}" class="uploaded-image"/></td>
+                    <td>
+                        <a href="{{url_for('update_liquor', id=i._id)}}" class="btn btn-primary btn-sm">Edit</a>
+                        <a href="{{url_for('delete_liquor', id=i._id)}}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            {%endfor%}
+        </thead>
+    </table> -->
 
 {%endblock%}

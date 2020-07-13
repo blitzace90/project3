@@ -67,6 +67,18 @@
     vertical-align: text-top;        
 }
 
+/* listing page */
+.textbox {
+    width: 200px;
+    justify-content: center;
+}
+
+.card {
+    text-align: center;
+    padding: 30px;
+}
+
 .uploaded-image {
-    width: 100px;
+    width: 250px;
+    text-align: center;
 }
