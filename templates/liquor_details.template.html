@@ -1,58 +1,59 @@
 {%extends 'layout.template.html' %}
 
 {%block content%}
+
 <br>
-<h2>Show each liquor</h2>
+<div class="container text-center">
+    <h2>{{liquor.name}}</h2>
+</div>
 
+<div class="container row">
 
-    <div class="container">
-        <label>Liquor name:</label>
-        <input type="text" class="form-control" name="liquor_name" value="{{liquor.name}}"/>
-    </div>
-
-    <div class="container">
-        <label>Liquor type:</label>
-        <input type="text" class="form-control" name="liquor_type" value="{{liquor.type}}"/>
-    </div>
-
-    <div class="form-group">
-        <label>Liquor name:</label>
-        <input type="text" class="form-control" name="primary_alcohol" value="{{liquor.primary_alcohol}}"/>
-    </div>
-
-    <div class="form-group">
-        <label>Serving method:</label>
-        <input type="text" class="form-control" name="serving_method" value="{{liquor.serving_method}}"/>
-    </div>
-
-    <div class="form-group">
-        <label>Standard drinkware:</label>
-        <input type="text" class="form-control" name="standard_drinkware" value="{{liquor.standard_drinkware}}"/>
-    </div>
-
-    <div>
-        <label>Ingredients:</label>
-        <textarea rows="6" name="ingredients" class="form-control" id="ingredients">{{liquor.ingredients}}</textarea>
-    </div>
-
-    <div>
-        <label>Preparation:</label>
-        <textarea rows="6" name="preparation" class="form-control" id="preparation">{{liquor.preparation}}</textarea>
-    </div>
-
-    <br>
-
-    <div>
-        <a id="upload_widget" class="cloudinary-button">Upload files</a>
+    <div class="col-lg-6">
         <input type="hidden" id="uploaded_file_url" name="uploaded_file_url"/>
-        <br/>
-        <img src="{{liquor.uploaded_file_url}}" id="uploaded-image" class="image-upload">
+        <img src="{{liquor.uploaded_file_url}}" id="uploaded-image" class="liquor-image">
     </div>
 
-    <br>
+    <div class="col-lg-6">
+        <div class="container">
+            <label>Liquor type:</label> {{liquor.type}}
+        </div>
 
-    <a href="{{url_for('update_liquor', id=_id)}}" class="btn btn-primary btn-sm">Edit</a>
-    <a href="{{url_for('delete_liquor', id=_id)}}" class="btn btn-danger btn-sm">Delete</a>
+        <div class="container">
+            <label>Primary alcohol:</label> {{liquor.primary_alcohol}}
+        </div>
+
+        <div class="container">
+            <label>Serving method:</label> {{liquor.serving_method}}
+        </div>
+
+        <div class="container">
+            <label>Standard drinkware:</label> {{liquor.standard_drinkware}}
+        </div>
+
+        <div class="container">
+            <label>Ingredients:</label> 
+            <br>
+            <textarea readonly rows="3" class="form-control">{{liquor.ingredients}}</textarea>
+        </div>
+
+        <div class="container">
+            <label>Preparation:</label> 
+            <br>
+            <textarea readonly rows="3" class="form-control">{{liquor.preparation}}</textarea>
+        </div>
+    </div>
+</div>
+
+<br>
+
+<div class="container text-center">
+    <a href="{{url_for('update_liquor', id=liquor._id)}}" class="btn btn-primary btn-sm">Edit</a>
+    <a href="{{url_for('delete_liquor', id=liquor._id)}}" class="btn btn-danger btn-sm">Delete</a>
+    <a href="{{url_for('show_liquor')}}" class="btn btn-primary btn-sm">Back</a>
+    <a href="" class="btn btn-danger btn-sm">Add Reviews</a>
+</div>
+
 
 
 

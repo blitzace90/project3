@@ -12,8 +12,7 @@
 
             <input type="submit" value ="Search" class="textbox"/>
 
-            <br>
-            <br>
+            <br><br>
 
             <label>Type:</label>
             <select class="" name="liquor-type">
@@ -25,6 +24,7 @@
         </form>  
     </div>
 
+    <br>
 
     <div class="container">
         <div class="row">
@@ -41,26 +41,5 @@
     <br>
 
 </div>
-    <!-- <table class="table">
-        <thead>
-            <tr>
-                <th>Liquor name</th>
-                <th>Liquor type</th>
-                <th>Liquor image</th>
-                <th></th>
-            </tr>
-            {%for i in all_liquor %}
-                <tr>
-                    <td>{{i.name}}</td>
-                    <td>{{i.type}}</td>
-                    <td><img src="{{i.uploaded_file_url}}" class="uploaded-image"/></td>
-                    <td>
-                        <a href="{{url_for('update_liquor', id=i._id)}}" class="btn btn-primary btn-sm">Edit</a>
-                        <a href="{{url_for('delete_liquor', id=i._id)}}" class="btn btn-danger btn-sm">Delete</a>
-                    </td>
-                </tr>
-            {%endfor%}
-        </thead>
-    </table> -->
 
 {%endblock%}

@@ -80,5 +80,12 @@
 
 .uploaded-image {
     width: 250px;
+    height: 250px;
     text-align: center;
 }
+
+/* Liquor details page */
+.liquor-image {
+    width: 300px;
+}
+
