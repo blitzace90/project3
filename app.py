@@ -32,10 +32,9 @@ def home():
 
 @app.route('/liquor/list')
 def show_liquor():
-    # all_liquor = client[DB_NAME].liquor.find()
     liquor_type = client[DB_NAME].liquor.find()
+    # Type = request.args.get('liquor-type')
     search_liquor = request.args.get('search-liquor')
-    # print(search_liquor)
 
     criteria = {}
     if search_liquor != "" and search_liquor is not None:
@@ -43,6 +42,10 @@ def show_liquor():
             "$regex": search_liquor,
             "$options": "i"
         }
+    # if Type == type:
+    #     criteria['type'] = {
+    #         "$options": "i"
+    #     }
 
     all_liquor = client[DB_NAME].liquor.find(criteria)
 
@@ -141,7 +144,7 @@ def process_update_liquor(id):
         }
     })
 
-    return redirect(url_for('show_liquor'))
+    return redirect(url_for('liquor_details', id=id))
 
 # Delete route
 

@@ -1,40 +1,90 @@
 {%extends 'layout.template.html' %}
 
 {%block content%}
-<h2>Edit liquor</h2>
-<form method="POST">
+<div class="background2 container-fluid">
+    <br>
+    <div class="container addliquor">
+        <h2>Edit liquor creation</h2>
+        <br>
+        <form method="POST">
+            <div class="container row">
+                <div class="col-lg-5 text-left">
+                    <div class="form-group">
+                        <label>Liquor name:</label>
+                        <input type="text" class="form-control" name="liquor_name" value="{{liquor.name}}"/>
+                    </div>
 
-    <div class="form-group">
-        <label>Liquor name:</label>
-        <input type="text" class="form-control" name="liquor_name" value="{{liquor.name}}"/>
+                    <div class="form-group">
+                        <label>Liquor type:</label>
+                        <select class="form-control" name="liquor_type">
+                            <option>{{liquor.type}}</option>
+                            <option value="Beer cocktail">Beer cocktail</option>
+                            <option value="Cocktail">Cocktail</option>
+                            <option value="Highball">Highball</option>
+                            <option value="Mixed drink">Mixed drink</option>
+                            <option value="Tequila">Tequila</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Primary alcohol:</label>
+                        <select class="form-control" name="primary_alcohol">
+                            <option>{{liquor.primary_alcohol}}</option>
+                            <option value="Beer">Beer</option>
+                            <option value="Gin">Gin</option>
+                            <option value="Rum">Rum</option>
+                            <option value="Tequila">Tequila</option>
+                            <option value="Vodka">Vodka</option>
+                            <option value="Whiskey">Whiskey</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Serving method:</label>
+                        <input type="text" class="form-control" name="serving_method" value="{{liquor.serving_method}}"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Standard drinkware:</label>
+                        <input type="text" class="form-control" name="standard_drinkware" value="{{liquor.standard_drinkware}}"/>
+                    </div>
+
+                    <div>
+                        <label>Ingredients:</label>
+                        <textarea rows="6" name="ingredients" class="form-control" id="ingredients">{{liquor.ingredients}}"</textarea>
+                    </div>
+
+                    <br>
+
+                    <div>
+                        <label>Preparation:</label>
+                        <textarea rows="6" name="preparation" class="form-control" id="preparation">{{liquor.preparation}}"</textarea>
+                    </div>
+                </div>
+
+                <div class="col-lg-7 upload-btn">
+                    <div>
+                        <a id="upload_widget" class="cloudinary-button">Upload image</a>
+                        <br>
+                        <input type="hidden" id="uploaded_file_url" name="uploaded_file_url"/>
+                        <br/>
+                        <img src="{{liquor.uploaded_file_url}}" id="uploaded-image" class="image-upload">
+                    </div>
+                </div>
+
+            </div>
+
+            <br>
+
+            <input type="submit" class="btn btn-primary"/>
+            <a href="{{url_for('liquor_details', id=liquor._id)}}" class="btn btn-primary btn-sm">Back</a>
+
+        </form>
     </div>
+    <br>
+</div>
 
-    <div class="form-group">
-        <label>Liquor type:</label>
-        <select class="form-control" name="liquor_type">
-            <option>{{liquor.type}}</option>
-            <option value="Beer cocktail">Beer cocktail</option>
-            <option value="Cocktail">Cocktail</option>
-            <option value="Highball">Highball</option>
-            <option value="Mixed drink">Mixed drink</option>
-            <option value="Tequila">Tequila</option>
-        </select>
-    </div>
-
-    <div class="form-group">
-        <label>Primary alcohol:</label>
-        <select class="form-control" name="primary_alcohol">
-            <option>{{liquor.primary_alcohol}}</option>
-            <option value="Beer">Beer</option>
-            <option value="Gin">Gin</option>
-            <option value="Rum">Rum</option>
-            <option value="Tequila">Tequila</option>
-            <option value="Vodka">Vodka</option>
-            <option value="Whiskey">Whiskey</option>
-        </select>
-    </div>
-
-    <div class="form-group">
+    <!-- <div class="form-group">
         <label>Serving method:</label>
         <input type="text" class="form-control" name="serving_method" value="{{liquor.serving_method}}"/>
     </div>
@@ -52,22 +102,9 @@
     <div>
         <label>Preparation:</label>
         <textarea rows="6" name="preparation" class="form-control" id="preparation">{{liquor.preparation}}</textarea>
-    </div>
+    </div> -->
 
-    <br>
 
-    <div>
-        <a id="upload_widget" class="cloudinary-button">Upload files</a>
-        <input type="hidden" id="uploaded_file_url" name="uploaded_file_url"/>
-        <br/>
-        <img src="{{liquor.uploaded_file_url}}" id="uploaded-image" class="image-upload">
-    </div>
-
-    <br>
-
-    <input type="submit" class="btn btn-primary"/>
-
-</form>
 
 {%endblock%}
 

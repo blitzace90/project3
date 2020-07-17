@@ -9,8 +9,12 @@
     padding-right: 30px;
 }
 
+.navbar-toggler {
+    border-color: white;
+}
+
 .navbar-brand img {
-    width:50%;
+    height: 50px;
 }
 
 /* Home page */
@@ -54,7 +58,7 @@
 }
 
 .image-upload {
-    width: 100%;
+    width: 70%;
 }
 
 #ingredients {
@@ -86,6 +90,8 @@
 
 /* Liquor details page */
 .liquor-image {
-    width: 300px;
+    height: 400px;
+    display: block;
+    margin: 0 auto;
 }
 

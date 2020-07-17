@@ -6,10 +6,11 @@
 <div class="container text-center">
     <h2>{{liquor.name}}</h2>
 </div>
+<br>
 
-<div class="container row">
+<div class="container-fluid row">
 
-    <div class="col-lg-6">
+    <div class="col-lg-6 text-center"> 
         <input type="hidden" id="uploaded_file_url" name="uploaded_file_url"/>
         <img src="{{liquor.uploaded_file_url}}" id="uploaded-image" class="liquor-image">
     </div>
@@ -50,11 +51,8 @@
 <div class="container text-center">
     <a href="{{url_for('update_liquor', id=liquor._id)}}" class="btn btn-primary btn-sm">Edit</a>
     <a href="{{url_for('delete_liquor', id=liquor._id)}}" class="btn btn-danger btn-sm">Delete</a>
-    <a href="{{url_for('show_liquor')}}" class="btn btn-primary btn-sm">Back</a>
-    <a href="" class="btn btn-danger btn-sm">Add Reviews</a>
+    <a href="" class="btn btn-primary btn-sm">Add Reviews</a>
 </div>
-
-
 
 
 {%endblock%}
