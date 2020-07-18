@@ -167,6 +167,84 @@ def process_delete_liquor(id):
     })
     return redirect(url_for('show_liquor'))
 
+# Add review route
+
+
+@app.route('/liquor/list/<id>/review/')
+def create_reviews(id):
+    liquor = client[DB_NAME].liquor.find_one({
+        "_id": ObjectId(id)
+    })   
+    return render_template('create_reviews.template.html', liquor=liquor)
+
+# Process review route
+
+
+@app.route('/liquor/list/<id>/review/', methods=["POST"])
+def process_create_reviews(id):
+    username = request.form.get('username')
+    date = request.form.get('review-date')
+    review = request.form.get('review')
+
+    # convert the string of the data into an actual date object
+    date = datetime.datetime.strptime(date, "%Y-%m-%d")
+
+    client[DB_NAME].liquor.update_one({
+        "_id": ObjectId(id),
+    }, {
+        "$push": {
+            'reviews': {
+                # ObjectId() is a function that returns a new ObjectId
+                "_id": ObjectId(),
+                "username": username,
+                "date": date,
+                "review": review
+            }
+        }
+    })
+
+    return redirect(url_for('liquor_details', id=id))
+
+# update review route
+
+
+@app.route('/review/<review_id>')
+def edit_reviews(review_id):
+    allReviews = client[DB_NAME].liquor.find_one({
+        'reviews._id': ObjectId(review_id)
+    }, {
+        'reviews': {
+            '$elemMatch': {
+                '_id': ObjectId(review_id)
+            }
+        }
+    })
+
+    reviews = allReviews['reviews'][0]
+
+    return render_template('edit_reviews.template.html', reviews=reviews)
+
+# process reviews update
+
+
+@app.route('/review/<review_id>', methods=["POST"])
+def process_edit_reviews(review_id):
+
+    date = request.form.get('review-date')
+    date = datetime.datetime.strptime(date, "%Y-%m-%d")
+
+    client[DB_NAME].liquor.update_one({
+        "reviews._id": ObjectId(review_id)
+    }, {
+        '$set': {
+            'reviews.$.username': request.form.get('username'),
+            'reviews.$.date': date,
+            'reviews.$.review': request.form.get('review')
+        }
+    })
+
+    return redirect(url_for('show_liquor'))
+
 
 # "magic code" -- boilerplate
 if __name__ == '__main__':

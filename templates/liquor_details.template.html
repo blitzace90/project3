@@ -51,9 +51,25 @@
 <div class="container text-center">
     <a href="{{url_for('update_liquor', id=liquor._id)}}" class="btn btn-primary btn-sm">Edit</a>
     <a href="{{url_for('delete_liquor', id=liquor._id)}}" class="btn btn-danger btn-sm">Delete</a>
-    <a href="" class="btn btn-primary btn-sm">Add Reviews</a>
+    <a href="{{url_for('create_reviews', id=liquor._id)}}" class="btn btn-primary btn-sm">Add Reviews</a>
 </div>
 
+<br>
+
+<h2>Reviews</h2>
+{%for r in liquor.reviews%}
+<div class="card">
+    <div class="card-body">
+        <ul class="list-group">
+            <li class="list-group-item">Username: {{r.username}}</li>
+            <li class="list-group-item">Date: {{r.date}}</li>
+            <li class="list-group-item">Review: {{r.review}}</li>
+        </ul>
+    </div>
+    <a href="{{url_for('edit_reviews', review_id= r._id)}}" class="btn btn-primary btn-sm">Edit</a>
+    <a href="#" class="btn btn-danger btn-sm">Delete</a>
+</div>
+{%endfor%}
 
 {%endblock%}
 
