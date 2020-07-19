@@ -128,11 +128,21 @@
     display: block;
     margin: 0 auto;
     width: 100%;
+    padding: 30px;
 }
 
-.review-box {
+#liquor-details {
+    padding: 30px;
+}
+
+#review-box {
     padding: 15px;
     border: solid;
+    margin: 15px;
+}
+
+#review-edit-delete-btn {
+    padding: 15px;
 }
 
 .reviews-list {

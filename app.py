@@ -272,6 +272,10 @@ def process_edit_reviews(review_id):
 
 @app.route('/review/<review_id>/delete')
 def confirm_delete_review(review_id):
+    liquor = client[DB_NAME].liquor.find_one({
+        "reviews._id": ObjectId(review_id)
+    })
+    id = liquor['_id']
     review = client[DB_NAME].liquor.find_one({
         'reviews._id': ObjectId(review_id)
     }, {
@@ -283,7 +287,8 @@ def confirm_delete_review(review_id):
     })['reviews'][0]
 
     return render_template('confirm_delete_reviews.template.html',
-                           review=review)
+                           review=review,
+                           id=id)
 
 # process delete review
 
