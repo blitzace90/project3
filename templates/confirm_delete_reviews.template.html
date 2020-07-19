@@ -3,11 +3,11 @@
 {%block content %}
 <div class="alert alert-danger text-center">
 	<form method="POST">
-		Are you sure you want to delete {{liquor.name}}?
+		Are you sure you want to delete review by {{review.username}}?
 		<div>
         <br>
 			<input type="submit" value="Confirm" class="btn btn-danger"/>
-            <a class="btn btn-primary" href="{{url_for('liquor_details', id=liquor._id)}}">Cancel</a>
+            <a class="btn btn-primary" href="#">Cancel</a>
         </div>
 	</form>
 </div>

@@ -32,8 +32,6 @@ def home():
 
 @app.route('/liquor/list')
 def show_liquor():
-    liquor_type = client[DB_NAME].liquor.find()
-    # Type = request.args.get('liquor-type')
     search_liquor = request.args.get('search-liquor')
 
     criteria = {}
@@ -42,14 +40,31 @@ def show_liquor():
             "$regex": search_liquor,
             "$options": "i"
         }
-    # if Type == type:
-    #     criteria['type'] = {
-    #         "$options": "i"
-    #     }
 
     all_liquor = client[DB_NAME].liquor.find(criteria)
 
-    return render_template('show_liquor.template.html', all_liquor=all_liquor, liquor_type=liquor_type)
+    liquor_type = client[DB_NAME].liquor.find()
+    type = request.args.get('type')
+
+    if type and type != 'Type':
+        criteria['type'] = type
+    else:
+        type = 'Type'
+
+    alcohol = client[DB_NAME].liquor.find()
+    primary_alcohol = request.args.get('primary_alcohol')
+
+    if primary_alcohol and primary_alcohol != 'Primary Alcohol':
+        criteria['primary_alcohol'] = primary_alcohol
+    else:
+        primary_alcohol = 'Primary Alcohol'
+
+    return render_template('show_liquor.template.html',
+                           all_liquor=all_liquor, 
+                           liquor_type=liquor_type,
+                           type=type,
+                           alcohol=alcohol,
+                           primary_alcohol=primary_alcohol)
 
 # List individual liquor
 
@@ -97,7 +112,7 @@ def process_create_liquor():
         "preparation": preparation,
         "uploaded_file_url": uploaded_file_url
     })
-
+    flash(f"'{liquor_name}' has been added")
     return redirect(url_for('show_liquor'))
 
 # Update route
@@ -143,7 +158,7 @@ def process_update_liquor(id):
             "uploaded_file_url": uploaded_file_url
         }
     })
-
+    flash(f"'{liquor_name}' has been updated")
     return redirect(url_for('liquor_details', id=id))
 
 # Delete route
@@ -165,6 +180,7 @@ def process_delete_liquor(id):
     client[DB_NAME].liquor.remove({
         "_id": ObjectId(id)
     })
+    flash(f"Liquor has been deleted")
     return redirect(url_for('show_liquor'))
 
 # Add review route
@@ -174,7 +190,7 @@ def process_delete_liquor(id):
 def create_reviews(id):
     liquor = client[DB_NAME].liquor.find_one({
         "_id": ObjectId(id)
-    })   
+    })
     return render_template('create_reviews.template.html', liquor=liquor)
 
 # Process review route
@@ -240,6 +256,40 @@ def process_edit_reviews(review_id):
             'reviews.$.username': request.form.get('username'),
             'reviews.$.date': date,
             'reviews.$.review': request.form.get('review')
+        }
+    })
+
+    return redirect(url_for('show_liquor'))
+
+# delete reviews route
+
+
+@app.route('/review/<review_id>/delete')
+def confirm_delete_review(review_id):
+    review = client[DB_NAME].liquor.find_one({
+        'reviews._id': ObjectId(review_id)
+    }, {
+        'reviews': {
+            '$elemMatch': {
+                '_id': ObjectId(review_id)
+            }
+        }
+    })['reviews'][0]
+
+    return render_template('confirm_delete_reviews.template.html', review=review)
+
+# process delete review
+
+
+@app.route('/review/<review_id>/delete', methods=["POST"])
+def process_delete_review(review_id):
+    client[DB_NAME].liquor.update_one({
+        'reviews._id': ObjectId(review_id)
+    }, {
+        "$pull": {
+            'reviews': {
+                '_id': ObjectId(review_id)
+            }
         }
     })
 

@@ -10,9 +10,9 @@
 
 <div class="container-fluid row">
 
-    <div class="col-lg-6 text-center"> 
+    <div class="col-lg-6"> 
         <input type="hidden" id="uploaded_file_url" name="uploaded_file_url"/>
-        <img src="{{liquor.uploaded_file_url}}" id="uploaded-image" class="liquor-image">
+        <img src="{{liquor.uploaded_file_url}}" id="uploaded-image" class="mx-auto d-block liquor-image" alt="liquor image">
     </div>
 
     <div class="col-lg-6">
@@ -56,21 +56,29 @@
 
 <br>
 
-<h2>Reviews</h2>
-{%for r in liquor.reviews%}
-<div class="card">
-    <div class="card-body">
-        <ul class="list-group">
-            <li class="list-group-item">Username: {{r.username}}</li>
-            <li class="list-group-item">Date: {{r.date}}</li>
-            <li class="list-group-item">Review: {{r.review}}</li>
-        </ul>
-    </div>
-    <a href="{{url_for('edit_reviews', review_id= r._id)}}" class="btn btn-primary btn-sm">Edit</a>
-    <a href="#" class="btn btn-danger btn-sm">Delete</a>
+<div class="container text-center">
+    <h2>Reviews</h2>
 </div>
-{%endfor%}
 
+<div class="reviews-list">
+    {%for r in liquor.reviews%}
+    <br>
+    <div class="container-fluid row review-box">
+        <div class="container col-lg-10">
+            {{r.username}}
+            <br>  
+            {{r.date}}
+            <br>
+            Review: {{r.review}}
+        </div>
+        <div class="container col-lg-2">
+            <a href="{{url_for('edit_reviews', review_id= r._id)}}" class="btn btn-primary btn-sm">Edit</a> 
+            <a href="{{url_for('confirm_delete_review', review_id=r._id)}}" class="btn btn-danger btn-sm">Delete</a>
+        </div>    
+    </div>
+    {%endfor%}
+</div>
+<br>
 {%endblock%}
 
 {%block js %}

@@ -7,23 +7,35 @@
 
     <div class="container text-center">
         <form class="container text-center" method="GET">
-        
             <input type="text" placeholder="Enter search" name="search-liquor" class="textbox text-center"/>
-
             <input type="submit" value ="Search" class="textbox"/>
-
-            <br><br>
-
-            <label>Type:</label>
-            <select class="" name="liquor-type">
-                {%for type in liquor_type %}
-                <option value="{{type._id}}">{{type.type}}</option>
-                {%endfor%}
-            </select>
-            
         </form>  
     </div>
+    <br>
+    <div class="row">
+        <div class="dropdown col-lg-6">
+            <button class="dropbtn">{{type}}</button>
+            <div class="dropdown-content">
+                <a href="?type=Beer cocktail">Beer cocktail</a>
+                <a href="?type=Cocktail">Cocktail</a>
+                <a href="?type=Highball">Highball</a>
+                <a href="?type=Mixed drink">Mixed drink</a>
+                <a href="?type=Tequila">Tequila</a>
+            </div>
+        </div>
 
+        <div class="dropdown col-lg-6">
+            <button class="dropbtn">{{primary_alcohol}}</button>
+            <div class="dropdown-content" name="primary-alcohol">
+                <a href="?primary_alcohol=Beer">Beer</a>
+                <a href="?primary_alcohol=Gin">Gin</a>
+                <a href="?primary_alcohol=Rum">Rum</a>
+                <a href="?primary_alcohol=Tequila">Tequila</a>
+                <a href="?primary_alcohol=Vodka">Vodka</a>
+                <a href="?primary_alcohol=Whiskey">Whiskey</a>
+            </div>
+        </div>
+    </div>
     <br>
 
     <div class="container">
