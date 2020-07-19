@@ -60,7 +60,7 @@ def show_liquor():
         primary_alcohol = 'Primary Alcohol'
 
     return render_template('show_liquor.template.html',
-                           all_liquor=all_liquor, 
+                           all_liquor=all_liquor,
                            liquor_type=liquor_type,
                            type=type,
                            alcohol=alcohol,
@@ -89,6 +89,8 @@ def create_liquor():
                            cloud_name=CLOUD_NAME,
                            upload_preset=UPLOAD_PRESET
                            )
+
+# Process add route
 
 
 @app.route('/liquor/create', methods=["POST"])
@@ -170,7 +172,8 @@ def delete_liquor(id):
         "_id": ObjectId(id)
     })
 
-    return render_template('confirm_delete_liquor.template.html', liquor=liquor)
+    return render_template('confirm_delete_liquor.template.html',
+                           liquor=liquor)
 
 # Process delete route
 
@@ -180,7 +183,7 @@ def process_delete_liquor(id):
     client[DB_NAME].liquor.remove({
         "_id": ObjectId(id)
     })
-    flash(f"Liquor has been deleted")
+    flash(f"A creation has been deleted")
     return redirect(url_for('show_liquor'))
 
 # Add review route
@@ -245,7 +248,10 @@ def edit_reviews(review_id):
 
 @app.route('/review/<review_id>', methods=["POST"])
 def process_edit_reviews(review_id):
-
+    liquor = client[DB_NAME].liquor.find_one({
+        "reviews._id": ObjectId(review_id)
+    })
+    id = liquor['_id']
     date = request.form.get('review-date')
     date = datetime.datetime.strptime(date, "%Y-%m-%d")
 
@@ -259,7 +265,7 @@ def process_edit_reviews(review_id):
         }
     })
 
-    return redirect(url_for('show_liquor'))
+    return redirect(url_for('liquor_details', id=id))
 
 # delete reviews route
 
@@ -276,13 +282,18 @@ def confirm_delete_review(review_id):
         }
     })['reviews'][0]
 
-    return render_template('confirm_delete_reviews.template.html', review=review)
+    return render_template('confirm_delete_reviews.template.html',
+                           review=review)
 
 # process delete review
 
 
 @app.route('/review/<review_id>/delete', methods=["POST"])
 def process_delete_review(review_id):
+    liquor = client[DB_NAME].liquor.find_one({
+        "reviews._id": ObjectId(review_id)
+    })
+    id = liquor['_id']
     client[DB_NAME].liquor.update_one({
         'reviews._id': ObjectId(review_id)
     }, {
@@ -293,7 +304,7 @@ def process_delete_review(review_id):
         }
     })
 
-    return redirect(url_for('show_liquor'))
+    return redirect(url_for('liquor_details', id=id))
 
 
 # "magic code" -- boilerplate
