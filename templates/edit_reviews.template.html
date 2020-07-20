@@ -1,22 +1,24 @@
 {% extends 'layout.template.html' %} 
 
 {%block content %}
-<h2>Edit reviews 
+<div class="background5 container-fluid">
+    <br>
+    <div class="container addliquor">
+        <h2>Edit reviews for <a style="color: blue">{{reviews.username}}</a></h2>
 
-<form method="POST">
-    <div class="form-group">
-        <label>Username: </label>
-        <input type="text" name="username" class="form-control" value="{{reviews.username}}"/>
+        <form method="POST">
+            <div class="form-group">
+                <label>Date</label>
+                <input type="date" name="review-date" class="form-control" value="{{reviews.date.strftime('%Y-%m-%d')}}"/>
+            </div>
+            <div class="form-group">
+                <label>Review</label>
+                <textarea name="review" class="form-control">{{reviews.review}}</textarea>
+            </div>
+            <input type="submit" value="Edit Review"/>
+        </form>
     </div>
-    <div class="form-group">
-        <label>Date</label>
-        <input type="date" name="review-date" class="form-control" value="{{reviews.date.strftime('%Y-%m-%d')}}"/>
-    </div>
-    <div class="form-group">
-        <label>Review</label>
-        <textarea name="review" class="form-control">{{reviews.review}}</textarea>
-    </div>
-    <input type="submit" value="Edit Review"/>
-</form>
+    <br>
+</div>
 
 {%endblock%}

@@ -1,7 +1,6 @@
 {%extends 'layout.template.html' %}
 
 {%block content%}
-
 <br>
 <div class="container text-center">
     <h2>{{liquor.name}}</h2>
@@ -10,7 +9,7 @@
 
 <div class="container-fluid row">
 
-    <div class="col-lg-6 mx-auto"> 
+    <div class="col-lg-6 mx-auto image-container"> 
         <input type="hidden" id="uploaded_file_url" name="uploaded_file_url"/>
         <img src="{{liquor.uploaded_file_url}}" id="uploaded-image" class="liquor-image d-block" alt="liquor image">
     </div>
