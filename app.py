@@ -229,6 +229,10 @@ def process_create_reviews(id):
 
 @app.route('/review/<review_id>')
 def edit_reviews(review_id):
+    liquor = client[DB_NAME].liquor.find_one({
+        "reviews._id": ObjectId(review_id)
+    })
+    id = liquor['_id']
     allReviews = client[DB_NAME].liquor.find_one({
         'reviews._id': ObjectId(review_id)
     }, {
@@ -241,7 +245,9 @@ def edit_reviews(review_id):
 
     reviews = allReviews['reviews'][0]
 
-    return render_template('edit_reviews.template.html', reviews=reviews)
+    return render_template('edit_reviews.template.html',
+                           reviews=reviews,
+                           id=id)
 
 # process reviews update
 

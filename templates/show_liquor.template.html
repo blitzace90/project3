@@ -1,6 +1,7 @@
 {% extends "layout.template.html" %}
 
 {%block content %}
+<div class="background6">
 <br>
 <div class="container text-center">
     <h3>List of Creations</h3>
@@ -47,11 +48,13 @@
     <div class="container">
         <div class="row">
             {%for i in all_liquor %}
-            <div class="card col-sm-6 col-md-4">
+            <div class="box col-sm-6 col-md-4">
+            <div class="card">
                 <a href="{{url_for('liquor_details', id=i._id)}}">
                 <img src="{{i.uploaded_file_url}}" class="uploaded-image card-img-top" alt="alcohol image"/>
                 <br><br>
                 <h5 class="card-title">{{i.name}}</h5>
+            </div>
             </div>
             {%endfor%}
         </div>
@@ -59,5 +62,5 @@
     <br>
 
 </div>
-
+</div>
 {%endblock%}

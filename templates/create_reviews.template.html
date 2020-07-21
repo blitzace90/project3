@@ -19,7 +19,8 @@
                 <label>Review</label>
                 <textarea name="review" class="form-control"></textarea>
             </div>
-            <input type="submit" value="Add Review"/>
+            <input type="submit" value="Add Review" class="btn btn-primary"/>
+            <a href="{{url_for('liquor_details', id=liquor._id)}}" class="btn btn-warning">Back</a>
         </form>
     </div>
     <br>

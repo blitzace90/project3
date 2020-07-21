@@ -84,11 +84,26 @@
 .card {
   text-align: center;
   padding: 30px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.box {
+  padding: 30px;
+}
+
+.card:hover {
+  -ms-transform: scale(1.5); /* IE 9 */
+  -webkit-transform: scale(1.5); /* Safari 3-8 */
+  transform: scale(1.2);
+  transition-delay: 0.05s;
+  z-index: 2;
+  background-color: rgb(240, 223, 221);
 }
 
 .uploaded-image {
-  width: 250px;
-  height: 250px;
+  width: 200px;
+  height: 200px;
   text-align: center;
 }
 
@@ -202,4 +217,16 @@
   height: 100%;
   text-align: center;
   margin: 0 auto;
+}
+
+.background6 {
+  background-color: beige;
+}
+
+#username {
+  display: none;
+}
+
+.btn {
+    margin: 2px;
 }

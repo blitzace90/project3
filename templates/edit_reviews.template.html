@@ -8,6 +8,9 @@
 
         <form method="POST">
             <div class="form-group">
+                <input id="username" type="username" name="username" value="{{reviews.username}}"/>
+            </div>
+            <div class="form-group">
                 <label>Date</label>
                 <input type="date" name="review-date" class="form-control" value="{{reviews.date.strftime('%Y-%m-%d')}}"/>
             </div>
@@ -15,10 +18,12 @@
                 <label>Review</label>
                 <textarea name="review" class="form-control">{{reviews.review}}</textarea>
             </div>
-            <input type="submit" value="Edit Review"/>
+            <input type="submit" value="Edit Review" class="btn btn-primary"/>
+            <a href="{{url_for('liquor_details', id=id)}}" class="btn btn-warning">Back</a>
         </form>
     </div>
     <br>
 </div>
 
 {%endblock%}
+
