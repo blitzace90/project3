@@ -202,18 +202,14 @@ def create_reviews(id):
 @app.route('/liquor/list/<id>/review/', methods=["POST"])
 def process_create_reviews(id):
     username = request.form.get('username')
-    date = request.form.get('review-date')
+    date = datetime.datetime.now().replace(microsecond=0)
     review = request.form.get('review')
-
-    # convert the string of the data into an actual date object
-    date = datetime.datetime.strptime(date, "%Y-%m-%d")
 
     client[DB_NAME].liquor.update_one({
         "_id": ObjectId(id),
     }, {
         "$push": {
             'reviews': {
-                # ObjectId() is a function that returns a new ObjectId
                 "_id": ObjectId(),
                 "username": username,
                 "date": date,
@@ -221,7 +217,7 @@ def process_create_reviews(id):
             }
         }
     })
-
+    flash(f"Review has been added")
     return redirect(url_for('liquor_details', id=id))
 
 # update review route
@@ -259,7 +255,7 @@ def process_edit_reviews(review_id):
     })
     id = liquor['_id']
     date = request.form.get('review-date')
-    date = datetime.datetime.strptime(date, "%Y-%m-%d")
+    date = datetime.datetime.now().replace(microsecond=0)
 
     client[DB_NAME].liquor.update_one({
         "reviews._id": ObjectId(review_id)
@@ -270,7 +266,7 @@ def process_edit_reviews(review_id):
             'reviews.$.review': request.form.get('review')
         }
     })
-
+    flash(f"Review has been edited")
     return redirect(url_for('liquor_details', id=id))
 
 # delete reviews route
@@ -314,7 +310,7 @@ def process_delete_review(review_id):
             }
         }
     })
-
+    flash(f"Review has been deleted")
     return redirect(url_for('liquor_details', id=id))
 
 

@@ -11,12 +11,11 @@
                 <input id="username" type="username" name="username" value="{{reviews.username}}"/>
             </div>
             <div class="form-group">
-                <label>Date</label>
-                <input type="date" name="review-date" class="form-control" value="{{reviews.date.strftime('%Y-%m-%d')}}"/>
+                <input id="review-date" type="date" name="review-date" value="{{reviews.date.strftime('%Y-%m-%d')}}"/>
             </div>
-            <div class="form-group">
-                <label>Review</label>
-                <textarea name="review" class="form-control">{{reviews.review}}</textarea>
+            <div class="form-group text-left">
+                <label>Review:</label>
+                <textarea rows="6" name="review" class="form-control">{{reviews.review}}</textarea>
             </div>
             <input type="submit" value="Edit Review" class="btn btn-primary"/>
             <a href="{{url_for('liquor_details', id=id)}}" class="btn btn-warning">Back</a>

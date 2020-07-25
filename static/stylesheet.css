@@ -92,10 +92,14 @@
   padding: 30px;
 }
 
+.card a:hover {
+  text-decoration: none;
+}
+
 .card:hover {
-  -ms-transform: scale(1.5); /* IE 9 */
-  -webkit-transform: scale(1.5); /* Safari 3-8 */
-  transform: scale(1.2);
+  -ms-transform: scale(1.1); /* IE 9 */
+  -webkit-transform: scale(1.1); /* Safari 3-8 */
+  transform: scale(1.1);
   transition-delay: 0.05s;
   z-index: 2;
   background-color: rgb(240, 223, 221);
@@ -142,11 +146,11 @@
 }
 
 .dropbtn {
-  background: rgb(109, 176, 252);
+  background: rgb(42, 138, 247);
   padding: 5px 15px;
   border-radius: 15px;
-  color: #fff;
-  text-decoration: none;
+  border-color: rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
 }
 
 /* Liquor details page */
@@ -181,6 +185,10 @@
 .reviews-list {
   padding-left: 80px;
   padding-right: 80px;
+}
+
+.l-details {
+  margin: 8px;
 }
 
 /* Update liquor page */
@@ -227,6 +235,10 @@
   display: none;
 }
 
+#review-date {
+  display: none;
+}
+
 .btn {
-    margin: 2px;
+  margin: 2px;
 }
