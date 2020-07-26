@@ -6,6 +6,7 @@ For all liquor lovers, bartenders, pub owners and many more, this website allows
 or concoct the drinks per their client's request if they are able to find the requested liquor here.
 The users are able to add, update, or delete their creation here, as well as add, update or delete reviews.
 The link is as follows: [](#)
+***
 
 ### **User Experience (UX)**
 **User stories** 
@@ -35,12 +36,11 @@ For bartenders/pub owners etc, I want to:
 - Flash messages are added after an action is executed
 - Easy search filter by categories or name search provided
 
-### **UI & Features**
-**UI**
+### **UI**
 - Navbar is presented on every page, with the website logo. 
 #### Home page
 - A simple navbar for users to navigate and a jumbotron with an add button
-#### Edit page
+#### Edit liquor page
 - Page is divided cleanly in half, with details to be added on left and image to be uploaded on right. 
 Image uploaded will be shown which explains the space.
 - Submit and add button at the bottom for execution
@@ -57,22 +57,69 @@ Image uploaded will be shown which explains the space.
 - Add review button is available here as well for users to add their reviews
 - The reviews are presented in boxes, with their respective details
 - Edit or delete for reviews are indicated with the edit or delete symbols
+#### Add review page
+- User can input their username and comment here
+- Date is tracked separately the moment submit button is clicked
 #### Edit review page
 - The username and date will not be shown or allowed to edit
 - Only comments can be edited
-#### 
+#### Delete liquor/review page
+- Prompt whether to proceed or cancel to return to previous page
+***
+### **Technologies used**
+- HTML
+- CSS
+- Python
+- Bootstrap (4.4.1)
+- Fontawesome
+- Cloudinary to store and import files to MongoDB
+- Flask with Jinja2
+- Pymongo
+- MongoDB as the noSQL database
+***
+### **Testing**
+The test site is tested to be responsive for:
+- iphone 4
+- galaxy s5
+- iphone 5/se
+- iphone 6/7/8
+- iphone 6/7/8 plus
+- iphone X
+- ipad
+- ipad pro
+- google chrome
+- microsoft edge
+- safari
+- internet explorer
 
+Basic checks include:
+- Testing that the C(Create), R(Read), U(Update), D(Delete) functions for liquor and reviews are working
+- Checking that the filter for both name search and category search are working
+- Testing that the navbar link categories are working
+- Testing that the read only fields cannot be edited
+- Testing that the route for all buttons are set correctly and working fine
 
-Technologies used
-Features left to implement
-Testing
-Manual testing
-Known errors
-Deployment
-Credits
+Known errors:
+- If updating on liquor details, need to reupload the image again
+- Time saved at review paged is in UTC (Coordinated Universal Time)
 
-features left to implement:
-replies to comments/reviews
-need not reupload image at editing
-user login and logout
-advanced filter options
+Features left to implement:
+- User logins and logouts
+- Editing feature to be limited to what user input only
+- Replies to comments/reviews
+- Advanced filter options
+***
+### **Deployment**
+The code is written using gitpod and pushed to github. Since Flask and Mongo is being used, deployment is 
+done with the help of Heroku and pushed to Heroku Master as well.
+***
+### **Credits**
+- Site images are taken from [unsplash.com](https://unsplash.com/)
+- Liquor images and details are taken from [wikipedia](https://en.wikipedia.org/wiki/List_of_cocktails)
+- Icons are taken from [fontawesome](https://fontawesome.com/)
+- Logo is made using [hatchful](https://hatchful.shopify.com/)
+- Colour gradient is taken from [webgradients](https://webgradients.com/)
+- Mock up is obtained from [mockup_generator](https://techsini.com/multi-mockup/index.php)
+
+*Site is strictly for educational purposes
+
