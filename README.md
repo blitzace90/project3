@@ -1,5 +1,6 @@
 # Liquor World
 ## Data Centric Development Milestone Project
+![mockup image](static/images/Mockup-image.PNG)
 ### **Introduction**
 There are many different types of liquor mixes, each with its own unique name and preparation method. 
 For all liquor lovers, bartenders, pub owners and many more, this website allows them to share their creations 
